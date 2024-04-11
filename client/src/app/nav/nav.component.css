@@ -1,0 +1,10 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.a1{
+    width: 100%;
+    height: 200px;
+    background-color:black;
+}
