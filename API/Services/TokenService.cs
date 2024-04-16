@@ -40,9 +40,9 @@ namespace API.Services
             return tokenHandler.WriteToken(token);
         }
 
-        string ITokenService.CreateToken(AppUsers user)
-        {
-            throw new NotImplementedException();
-        }
+        // string ITokenService.CreateToken(AppUsers user)
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }

@@ -18,6 +18,7 @@ namespace API.Controller
         private readonly ITokenService _tokenService;
         public AccountController(DataContext context, ITokenService tokenService)
         {
+            _tokenService = tokenService;
             _context = context;
         }
 
@@ -51,7 +52,7 @@ namespace API.Controller
 
             if(user == null) return Unauthorized("Invanlid username");
 
-            using var hmac = new HMACSHA512(user.PasswordSalt);
+            using var hmac = new HMACSHA256(user.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(logindto.Password));
 
@@ -70,5 +71,6 @@ namespace API.Controller
         {
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
+
     }
 }
