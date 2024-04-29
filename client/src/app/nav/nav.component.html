@@ -4,19 +4,21 @@
       <div>
         <a class="navbar-brand" routerLink="/" routerLinkActive="active">Dating App</a>
       </div>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ng-container *ngIf="accountService.currentUser$ | async">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="/members" routerLinkActive="active">Matchs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/messsages" routerLinkActive="active">Messages</a>
+            </li>
+          </ng-container>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/members" routerLinkActive="active">Matchs</a>
+            <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/lists" routerLinkActive="active">List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/messsages" routerLinkActive="active">Messages</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logout()">Log Out</a>
-          </li> -->
         </ul>
 
         <div class="dropdown " *ngIf="(accountService.currentUser$ | async) as user" dropdown>
