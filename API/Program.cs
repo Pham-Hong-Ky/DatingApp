@@ -4,12 +4,32 @@ using API.Extensions;
 using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-var host = builder.Build();
+// Add services to the container.
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
 
-using var scope = host.Services.CreateScope();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors();
+
+builder.Services.AddApplicationServices(builder.Configuration);
+
+builder.Services.AddIdentityServices(builder.Configuration);
+
+var app = builder.Build();
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+using var scope = app.Services.CreateScope();
 
 var services = scope.ServiceProvider;
 
@@ -27,28 +47,6 @@ catch(Exception ex)
     logger.LogError(ex, "An error occured during migration");
 }
 
-// Add services to the container.
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddCors();
-
-builder.Services.AddApplicationServices(builder.Configuration);
-
-builder.Services.AddIdentityServices(builder.Configuration);
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
@@ -57,10 +55,11 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localh
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.UseAuthentication();    
+
+app.UseAuthorization();
 
 app.MapControllers();
 
+// await app.RunAsync();
 app.Run();

@@ -1,5 +1,6 @@
 
 using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection service, IConfiguration config)
         {
             service.AddScoped<ITokenService, TokenService>();
+            service.AddScoped<IUserRepository, UserRepository>();
+            service.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             service.AddDbContext<DataContext>(options=>{
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });

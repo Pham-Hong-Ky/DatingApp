@@ -35,7 +35,7 @@ namespace api.Data.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Genders")
+                    b.Property<string>("Gender")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Interests")
@@ -82,7 +82,7 @@ namespace api.Data.Migrations
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Url")
+                    b.Property<string>("url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

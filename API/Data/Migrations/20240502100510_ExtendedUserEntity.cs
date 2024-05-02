@@ -54,7 +54,7 @@ namespace api.Data.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
-                name: "Genders",
+                name: "Gender",
                 table: "Users",
                 type: "TEXT",
                 nullable: true);
@@ -96,7 +96,7 @@ namespace api.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    url = table.Column<string>(type: "TEXT", nullable: true),
                     IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
                     PublicId = table.Column<string>(type: "TEXT", nullable: true),
                     AppUsersId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -141,7 +141,7 @@ namespace api.Data.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "Genders",
+                name: "Gender",
                 table: "Users");
 
             migrationBuilder.DropColumn(
