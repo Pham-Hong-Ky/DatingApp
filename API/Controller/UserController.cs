@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using API.Interfaces;
 using API.DTOs;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace API.Controller
 {
