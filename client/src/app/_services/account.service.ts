@@ -1,3 +1,4 @@
+import { Photo } from './../_models/photo';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -20,8 +21,7 @@ export class AccountService {
       map((response: User) =>{
         const user = response;
         if(user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     )
@@ -31,18 +31,21 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'Account/register', model).pipe(
       map((user: User) =>{
         if(user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentSource.next(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
     )
   }
+
   setCurrentUser(user: User){
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentSource.next(user);
   }
+
   logout(){
     localStorage.removeItem('user');
     this.currentSource.next(null);
   }
+  
 }
