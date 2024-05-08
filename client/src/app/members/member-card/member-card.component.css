@@ -36,6 +36,10 @@ img{
     opacity: 1;
 }
 
-.animate{
+.animate{ 
     transition: all 0.5s ease-in-out;
+}
+
+.card.mb-4{
+    width: 160px;
 }
