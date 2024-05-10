@@ -11,7 +11,7 @@ using API.Helpers;
 
 namespace API.Controller
 {
-    // [Authorize]
+    [Authorize]
     public class UserController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
@@ -25,6 +25,7 @@ namespace API.Controller
             _photoService = photoService;
         }
 
+        // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -42,7 +43,8 @@ namespace API.Controller
 
             return Ok(users);
         }
- 
+    
+        [Authorize(Roles = "Member")]
         [HttpGet("{username}" , Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUsers(string username)
         {

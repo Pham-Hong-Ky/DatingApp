@@ -1,7 +1,9 @@
 
 using API.Data;
+using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,10 +52,14 @@ app.MapControllers();
 try
 {
     var context = services.GetRequiredService<DataContext>();
+
+    var userManager = services.GetRequiredService<UserManager<AppUsers>>();
+
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     
     await context.Database.MigrateAsync();
     
-    await Seed.SeedUser(context);
+    await Seed.SeedUser(userManager, roleManager);
 } 
 catch(Exception ex)
 {
