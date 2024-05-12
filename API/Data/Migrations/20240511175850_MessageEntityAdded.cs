@@ -1,10 +1,14 @@
-﻿
+﻿﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace API.Data.Migrations
 {
+    /// <inheritdoc />
     public partial class MessageEntityAdded : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -19,9 +23,9 @@ namespace API.Data.Migrations
                     RecipientUsername = table.Column<string>(type: "TEXT", nullable: true),
                     Content = table.Column<string>(type: "TEXT", nullable: true),
                     DateRead = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    MessageSent = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SenderDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    RecipientDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                    MessageSent = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    SenderDeleted = table.Column<bool>(type: "INTEGER", nullable: true),
+                    RecipientDeleted = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,6 +55,7 @@ namespace API.Data.Migrations
                 column: "SenderId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

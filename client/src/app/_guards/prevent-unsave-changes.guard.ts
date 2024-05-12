@@ -1,12 +1,17 @@
+
 import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, CanDeactivateFn, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ConfirmService } from '../_services/confirm.service';
+
 
 
 export const PreventUnsaveChangesGuard: CanDeactivateFn<MemberEditComponent> = (component) => {
-    if(component.editForm.dirty){
-      return confirm('Are you sure you want to continue? Any unsaved changes will be lost');
+  const confirmService = inject(ConfirmService);
+  
+  if(component.editForm.dirty){
+      return confirmService.confirm()
     }
     return true;
   }
